@@ -1,4 +1,5 @@
 pub use serde_derive::{Deserialize as Deserialise, Serialize as Serialise};
+pub use serde_json;
 
 mod response_messages;
 mod solid_structs;
