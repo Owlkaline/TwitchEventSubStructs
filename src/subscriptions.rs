@@ -1,3 +1,4 @@
+use crate::*;
 use crate::{Deserialise, Serialise};
 
 macro_rules! from_string {
