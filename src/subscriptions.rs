@@ -383,18 +383,3 @@ impl Condition {
     self
   }
 }
-
-#[derive(Serialise, Deserialise, Debug, Clone, PartialEq)]
-pub struct Transport {
-  pub method: String,
-  pub session_id: String,
-}
-
-impl Transport {
-  pub fn new<S: Into<String>>(session_id: S) -> Transport {
-    Transport {
-      method: "websocket".to_string(),
-      session_id: session_id.into(),
-    }
-  }
-}
