@@ -401,11 +401,3 @@ pub struct CustomPointsRewardRedeemData {
   pub reward: Reward,
   pub redeemed_at: String,
 }
-
-#[derive(Debug)]
-pub enum ResponseType {
-  Event(Event),
-  //Error(EventSubError),
-  RawResponse(String),
-  Close,
-}
