@@ -1,5 +1,5 @@
 pub use serde;
-pub use crate serde_derive;
+pub use serde_derive;
 use serde_derive::{Deserialize as Deserialise, Serialize as Serialise};
 pub use serde_json;
 pub use serde_with;
