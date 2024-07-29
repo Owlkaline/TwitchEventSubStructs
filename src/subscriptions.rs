@@ -56,9 +56,10 @@ pub enum Subscription {
   ChannelShoutoutCreate,
   ChannelShoutoutReceive,
   ChatMessage,
-  BanTimeoutUser,
-  DeleteMessage,
   AdBreakBegin,
+  PermissionBanTimeoutUser,
+  PermissionDeleteMessage,
+  PermissionReadChatters,
   Custom((String, String, EventSubscription)),
 }
 
@@ -100,8 +101,9 @@ impl Subscription {
     ChannelShoutoutCreate,
     ChannelShoutoutReceive,
     ChatMessage,
-    BanTimeoutUser,
-    DeleteMessage,
+    PermissionBanTimeoutUser,
+    PermissionDeleteMessage,
+    PermissionReadChatters,
     AdBreakBegin
   });
 
@@ -133,8 +135,9 @@ impl Subscription {
     ChannelShoutoutCreate,
     ChannelShoutoutReceive,
     ChatMessage,
-    BanTimeoutUser,
-    DeleteMessage,
+    PermissionBanTimeoutUser,
+    PermissionDeleteMessage,
+    PermissionReadChatters,
     AdBreakBegin
   });
 
@@ -155,8 +158,7 @@ impl Subscription {
       ),
       Subscription::AdBreakBegin => ("channel.ad_break.begin", "channel:read:ads", "1"),
       Subscription::ChannelUpdate => ("channel.update", "", "2"),
-      Subscription::BanTimeoutUser => ("", "moderator:manage:banned_users", ""),
-      Subscription::DeleteMessage => ("", "moderator:manage:chat_messages", ""),
+
       Subscription::ChannelNewSubscription => {
         ("channel.subscribe", "channel:read:subscriptions", "1")
       }
@@ -240,6 +242,9 @@ impl Subscription {
         "moderator:read:shoutouts+moderator:manage:shoutouts",
         "1",
       ),
+      Subscription::PermissionBanTimeoutUser => ("", "moderator:manage:banned_users", ""),
+      Subscription::PermissionDeleteMessage => ("", "moderator:manage:chat_messages", ""),
+      Subscription::PermissionReadChatters => ("", "moderator:read:chatters", ""),
       Subscription::Custom((tag, scope, ..)) => (tag.as_str(), scope.as_str(), ""),
     };
 
