@@ -139,36 +139,22 @@ pub enum FragmentType {
 #[derive(Serialise, Deserialise, Debug, Clone)]
 pub struct Fragments {
   #[serde(rename = "type")]
-  kind: FragmentType,
-  text: String,
-  cheermote: Option<CheerMote>,
-  emote: Option<Emote>,
-  mention: Option<Mention>,
-}
-
-impl Fragments {
-  pub fn _is_text(&self) -> bool {
-    self.kind == "text"
-  }
-
-  pub fn is_mention(&self) -> bool {
-    self.kind == "mention"
-  }
-
-  pub fn text(&self) -> String {
-    self.text.to_string()
-  }
+  pub kind: FragmentType,
+  pub text: String,
+  pub cheermote: Option<CheerMote>,
+  pub emote: Option<Emote>,
+  pub mention: Option<Mention>,
 }
 
 impl Message {
   pub fn get_written_message(&self) -> Option<String> {
     let mut text = None;
     for fragment in &self.fragments {
-      if !fragment.is_mention() {
+      if fragment.kind != FragmentType::Mention {
         if let Some(ref mut text) = text {
-          *text = format!("{} {}", text, fragment.text());
+          *text = format!("{} {}", text, fragment.text);
         } else {
-          text = Some(fragment.text().to_string().trim().to_string());
+          text = Some(fragment.text.to_string().trim().to_string());
         }
       }
     }
