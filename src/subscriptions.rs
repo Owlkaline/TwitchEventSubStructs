@@ -158,7 +158,6 @@ impl Subscription {
       ),
       Subscription::AdBreakBegin => ("channel.ad_break.begin", "channel:read:ads", "1"),
       Subscription::ChannelUpdate => ("channel.update", "", "2"),
-
       Subscription::ChannelNewSubscription => {
         ("channel.subscribe", "channel:read:subscriptions", "1")
       }

@@ -123,12 +123,23 @@ pub struct CheerMote {
   bits: u32,
   tier: u32,
 }
+#[derive(Serialise, Deserialise, Clone, Debug, PartialEq)]
+pub enum FragmentType {
+  #[serde(rename = "text")]
+  Text,
+  #[serde(rename = "cheermote")]
+  CheerMote,
+  #[serde(rename = "emote")]
+  Emote,
+  #[serde(rename = "mention")]
+  Mention,
+}
 
 #[repr(C)]
 #[derive(Serialise, Deserialise, Debug, Clone)]
 pub struct Fragments {
   #[serde(rename = "type")]
-  kind: String,
+  kind: FragmentType,
   text: String,
   cheermote: Option<CheerMote>,
   emote: Option<Emote>,
