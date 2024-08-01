@@ -110,10 +110,10 @@ pub struct Mention {
 #[repr(C)]
 #[derive(Serialise, Deserialise, Debug, Clone)]
 pub struct Emote {
-  id: String,
-  emote_set_id: String,
-  owner_id: Option<String>,
-  format: Option<Vec<String>>,
+  pub id: String,
+  pub emote_set_id: String,
+  pub owner_id: Option<String>,
+  pub format: Option<Vec<String>>,
 }
 
 #[repr(C)]
