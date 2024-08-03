@@ -60,6 +60,7 @@ pub enum Subscription {
   PermissionBanTimeoutUser,
   PermissionDeleteMessage,
   PermissionReadChatters,
+  PermissionReadModerator,
   Custom((String, String, EventSubscription)),
 }
 
@@ -104,6 +105,7 @@ impl Subscription {
     PermissionBanTimeoutUser,
     PermissionDeleteMessage,
     PermissionReadChatters,
+    PermissionReadModerator,
     AdBreakBegin
   });
 
@@ -138,6 +140,7 @@ impl Subscription {
     PermissionBanTimeoutUser,
     PermissionDeleteMessage,
     PermissionReadChatters,
+    PermissionReadModerator,
     AdBreakBegin
   });
 
@@ -244,6 +247,7 @@ impl Subscription {
       Subscription::PermissionBanTimeoutUser => ("", "moderator:manage:banned_users", ""),
       Subscription::PermissionDeleteMessage => ("", "moderator:manage:chat_messages", ""),
       Subscription::PermissionReadChatters => ("", "moderator:read:chatters", ""),
+      Subscription::PermissionReadModerator => ("", "moderation:read", ""),
       Subscription::Custom((tag, scope, ..)) => (tag.as_str(), scope.as_str(), ""),
     };
 
