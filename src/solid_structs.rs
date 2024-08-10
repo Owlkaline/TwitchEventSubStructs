@@ -80,6 +80,14 @@ pub struct TopPredictors {
 }
 
 #[derive(Serialise, Deserialise, Clone, Debug)]
+pub struct BeginOutcome {
+  id: String,
+  title: String,
+  #[serde(rename = "color")]
+  colour: String,
+}
+
+#[derive(Serialise, Deserialise, Clone, Debug)]
 pub struct Outcome {
   pub id: String,
   pub title: String,
@@ -96,7 +104,7 @@ pub struct PredictionBeginData {
   #[serde(flatten, with = "prefix_broadcaster")]
   pub broadcaster: User,
   pub title: String,
-  pub outcomes: Vec<Outcome>,
+  pub outcomes: Vec<BeginOutcome>,
   pub started_at: String,
   pub locks_at: String,
 }

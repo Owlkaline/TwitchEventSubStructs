@@ -311,6 +311,10 @@ impl Subscription {
       | Subscription::ChannelPollBegin
       | Subscription::ChannelPollProgress
       | Subscription::ChannelPollEnd
+      | Subscription::ChannelPredictionBegin
+      | Subscription::ChannelPredictionProgress
+      | Subscription::ChannelPredictionLock
+      | Subscription::ChannelPredictionEnd
       | Subscription::ChannelPointsAutoRewardRedeem => event_subscription.condition(condition),
       Subscription::Custom((_, _, event)) => event.to_owned().transport(Transport::new(session_id)),
 

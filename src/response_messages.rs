@@ -219,12 +219,12 @@ pub enum Event {
   PollProgress(PollProgressData),
   PollBegin(PollBeginData),
   PollEnd(PollEndData),
-  PredictionBegin(PredictionBeginData),
   PredictionProgress(PredicitonProgressData),
+  PredictionBegin(PredictionBeginData),
   PredictionLock(PredictionLockData),
   PredictionEnd(PredicitionEndData),
-  HypeTrainBegin(HypeTrainBeginData),
   HypeTrainProgress(HypeTrainProgressData),
+  HypeTrainBegin(HypeTrainBeginData),
   HypeTrainEnd(HypeTrainEndData),
 }
 
