@@ -303,12 +303,15 @@ impl Subscription {
       Subscription::ChannelRaid => event_subscription
         .condition(condition.to_broadcaster_user_id(broadcaster_account_id.clone())),
       Subscription::ChannelUpdate => event_subscription.condition(condition),
-      Subscription::ChannelNewSubscription => event_subscription.condition(condition),
-      Subscription::ChannelSubscriptionEnd => event_subscription.condition(condition),
-      Subscription::ChannelGiftSubscription => event_subscription.condition(condition),
-      Subscription::ChannelResubscription => event_subscription.condition(condition),
-      Subscription::ChannelCheer => event_subscription.condition(condition),
-      Subscription::ChannelPointsAutoRewardRedeem => event_subscription.condition(condition),
+      Subscription::ChannelNewSubscription
+      | Subscription::ChannelSubscriptionEnd
+      | Subscription::ChannelGiftSubscription
+      | Subscription::ChannelResubscription
+      | Subscription::ChannelCheer
+      | Subscription::ChannelPollBegin
+      | Subscription::ChannelPollProgress
+      | Subscription::ChannelPollEnd
+      | Subscription::ChannelPointsAutoRewardRedeem => event_subscription.condition(condition),
       Subscription::Custom((_, _, event)) => event.to_owned().transport(Transport::new(session_id)),
 
       _ => event_subscription,
