@@ -344,9 +344,12 @@ pub struct ChannelPointsVoting {
 pub struct Choices {
   pub id: String,
   pub title: String,
-  pub bit_votes: u32,
-  pub channel_points_votes: u32,
+  #[serde(default)]
   pub votes: u32,
+  #[serde(default)]
+  pub channel_points_votes: u32,
+  #[serde(default)]
+  pub bit_votes: u32,
 }
 
 #[derive(Serialise, Deserialise, Clone, Debug)]
@@ -380,7 +383,7 @@ pub struct PollProgressData {
 pub struct PollBeginData {
   pub id: String,
   #[serde(flatten, with = "prefix_broadcaster")]
-  pub braodcaster: User,
+  pub broadcaster: User,
   pub title: String,
   pub choices: Vec<Choices>,
   pub bits_voting: BitsVotingData,
