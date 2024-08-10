@@ -346,7 +346,7 @@ pub struct Choices {
   pub title: String,
   pub votes: u32,
   pub channel_points_votes: u32,
-  pub bit_votes: u32,
+  pub bits_votes: u32,
 }
 
 #[derive(Serialise, Deserialise, Clone, Debug)]
@@ -364,9 +364,9 @@ pub struct PollEndData {
   pub choices: Vec<Choices>,
   pub bits_voting: BitsVotingData,
   pub channel_points_voting: ChannelPointsVoting,
-  pub status: String,
   pub started_at: String,
   pub ended_at: String,
+  pub status: String,
 }
 
 #[derive(Serialise, Deserialise, Clone, Debug)]
