@@ -96,7 +96,7 @@ pub struct GMSubscription {
   pub condition: Option<Condition>,
   pub transport: Transport,
   pub created_at: String,
-  pub event: Option<Event>,
+  //pub event: Option<Event>,
 }
 
 #[repr(C)]
