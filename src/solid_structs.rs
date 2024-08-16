@@ -2,14 +2,15 @@ use crate::*;
 use crate::{Deserialise, Serialise};
 use serde_with::with_prefix;
 
-with_prefix!(prefix_broadcaster "broadcaster_");
-with_prefix!(prefix_from_broadcaster "from_broadcaster_");
-with_prefix!(prefix_to_broadcaster "to_broadcaster_");
-with_prefix!(prefix_requester "requester_");
-with_prefix!(prefix_request "request_");
+with_prefix!(pub prefix_broadcaster "broadcaster_");
+with_prefix!(pub prefix_from_broadcaster "from_broadcaster_");
+with_prefix!(pub prefix_to_broadcaster "to_broadcaster_");
+with_prefix!(pub prefix_requester "requester_");
+with_prefix!(pub prefix_request "request_");
 with_prefix!(pub prefix_thread "thread_");
 with_prefix!(pub prefix_parent "parent_");
-with_prefix!(prefix_chatter "chatter_");
+with_prefix!(pub prefix_chatter "chatter_");
+with_prefix!(pub prefix_target "target_");
 
 #[derive(Serialise, Deserialise, Clone, Debug)]
 pub struct TopContributions {
@@ -414,4 +415,13 @@ pub struct CustomPointsRewardRedeemData {
   pub status: String,
   pub reward: Reward,
   pub redeemed_at: String,
+}
+
+#[derive(Serialise, Deserialise, Clone, Debug)]
+pub struct MessageDeletedData {
+  #[serde(flatten, with = "prefix_broadcaster")]
+  pub broadcaster: User,
+  #[serde(flatten, with = "prefix_target")]
+  pub target: User,
+  pub message_id: String,
 }

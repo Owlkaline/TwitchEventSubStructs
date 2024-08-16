@@ -57,10 +57,12 @@ pub enum Subscription {
   ChannelShoutoutReceive,
   ChatMessage,
   AdBreakBegin,
+  ModeratorDeletedMessage,
   PermissionBanTimeoutUser,
   PermissionDeleteMessage,
   PermissionReadChatters,
   PermissionReadModerator,
+  PermissionCreateCustomReward,
   Custom((String, String, EventSubscription)),
 }
 
@@ -102,10 +104,12 @@ impl Subscription {
     ChannelShoutoutCreate,
     ChannelShoutoutReceive,
     ChatMessage,
+    ModeratorDeletedMessage,
     PermissionBanTimeoutUser,
     PermissionDeleteMessage,
     PermissionReadChatters,
     PermissionReadModerator,
+    PermissionCreateCustomReward,
     AdBreakBegin
   });
 
@@ -137,10 +141,12 @@ impl Subscription {
     ChannelShoutoutCreate,
     ChannelShoutoutReceive,
     ChatMessage,
+    ModeratorDeletedMessage,
     PermissionBanTimeoutUser,
     PermissionDeleteMessage,
     PermissionReadChatters,
     PermissionReadModerator,
+    PermissionCreateCustomReward,
     AdBreakBegin
   });
 
@@ -244,10 +250,14 @@ impl Subscription {
         "moderator:read:shoutouts+moderator:manage:shoutouts",
         "1",
       ),
+      Subscription::ModeratorDeletedMessage => {
+        ("channel.chat.message_delete", "user:read:chat", "1")
+      }
       Subscription::PermissionBanTimeoutUser => ("", "moderator:manage:banned_users", ""),
       Subscription::PermissionDeleteMessage => ("", "moderator:manage:chat_messages", ""),
       Subscription::PermissionReadChatters => ("", "moderator:read:chatters", ""),
       Subscription::PermissionReadModerator => ("", "moderation:read", ""),
+      Subscription::PermissionCreateCustomReward => ("", "channel:manage:redemptions", ""),
       Subscription::Custom((tag, scope, ..)) => (tag.as_str(), scope.as_str(), ""),
     };
 
@@ -303,6 +313,9 @@ impl Subscription {
       Subscription::ChannelRaid => event_subscription
         .condition(condition.to_broadcaster_user_id(broadcaster_account_id.clone())),
       Subscription::ChannelUpdate => event_subscription.condition(condition),
+      Subscription::ModeratorDeletedMessage | Subscription::PermissionCreateCustomReward => {
+        event_subscription.condition(condition.user_id(broadcaster_account_id.to_owned()))
+      }
       Subscription::ChannelNewSubscription
       | Subscription::ChannelSubscriptionEnd
       | Subscription::ChannelGiftSubscription
@@ -315,6 +328,9 @@ impl Subscription {
       | Subscription::ChannelPredictionProgress
       | Subscription::ChannelPredictionLock
       | Subscription::ChannelPredictionEnd
+      | Subscription::ChannelHypeTrainBegin
+      | Subscription::ChannelHypeTrainProgress
+      | Subscription::ChannelHypeTrainEnd
       | Subscription::ChannelPointsAutoRewardRedeem => event_subscription.condition(condition),
       Subscription::Custom((_, _, event)) => event.to_owned().transport(Transport::new(session_id)),
 

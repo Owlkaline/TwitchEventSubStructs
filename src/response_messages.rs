@@ -226,6 +226,7 @@ pub enum Event {
   HypeTrainProgress(HypeTrainProgressData),
   HypeTrainBegin(HypeTrainBeginData),
   HypeTrainEnd(HypeTrainEndData),
+  MessageDeleted(MessageDeletedData),
 }
 
 #[derive(Serialise, Deserialise, Debug, Clone)]
