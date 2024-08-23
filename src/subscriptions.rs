@@ -63,6 +63,7 @@ pub enum Subscription {
   PermissionReadChatters,
   PermissionReadModerator,
   PermissionCreateCustomReward,
+  PermissionSendAnnouncements,
   Custom((String, String, EventSubscription)),
 }
 
@@ -110,6 +111,7 @@ impl Subscription {
     PermissionReadChatters,
     PermissionReadModerator,
     PermissionCreateCustomReward,
+    PermissionSendAnnouncements,
     AdBreakBegin
   });
 
@@ -147,6 +149,7 @@ impl Subscription {
     PermissionReadChatters,
     PermissionReadModerator,
     PermissionCreateCustomReward,
+    PermissionSendAnnouncements,
     AdBreakBegin
   });
 
@@ -258,6 +261,7 @@ impl Subscription {
       Subscription::PermissionReadChatters => ("", "moderator:read:chatters", ""),
       Subscription::PermissionReadModerator => ("", "moderation:read", ""),
       Subscription::PermissionCreateCustomReward => ("", "channel:manage:redemptions", ""),
+      Subscription::PermissionSendAnnouncements => ("", "moderator:manage:announcements", ""),
       Subscription::Custom((tag, scope, ..)) => (tag.as_str(), scope.as_str(), ""),
     };
 
