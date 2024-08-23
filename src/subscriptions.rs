@@ -62,7 +62,7 @@ pub enum Subscription {
   PermissionDeleteMessage,
   PermissionReadChatters,
   PermissionReadModerator,
-  PermissionCreateCustomReward,
+  PermissionManageRewards,
   PermissionSendAnnouncements,
   Custom((String, String, EventSubscription)),
 }
@@ -110,7 +110,7 @@ impl Subscription {
     PermissionDeleteMessage,
     PermissionReadChatters,
     PermissionReadModerator,
-    PermissionCreateCustomReward,
+    PermissionManageRewards,
     PermissionSendAnnouncements,
     AdBreakBegin
   });
@@ -148,7 +148,7 @@ impl Subscription {
     PermissionDeleteMessage,
     PermissionReadChatters,
     PermissionReadModerator,
-    PermissionCreateCustomReward,
+    PermissionManageRewards,
     PermissionSendAnnouncements,
     AdBreakBegin
   });
@@ -260,7 +260,7 @@ impl Subscription {
       Subscription::PermissionDeleteMessage => ("", "moderator:manage:chat_messages", ""),
       Subscription::PermissionReadChatters => ("", "moderator:read:chatters", ""),
       Subscription::PermissionReadModerator => ("", "moderation:read", ""),
-      Subscription::PermissionCreateCustomReward => ("", "channel:manage:redemptions", ""),
+      Subscription::PermissionManageRewards => ("", "channel:manage:redemptions", ""),
       Subscription::PermissionSendAnnouncements => ("", "moderator:manage:announcements", ""),
       Subscription::Custom((tag, scope, ..)) => (tag.as_str(), scope.as_str(), ""),
     };
@@ -317,7 +317,7 @@ impl Subscription {
       Subscription::ChannelRaid => event_subscription
         .condition(condition.to_broadcaster_user_id(broadcaster_account_id.clone())),
       Subscription::ChannelUpdate => event_subscription.condition(condition),
-      Subscription::ModeratorDeletedMessage | Subscription::PermissionCreateCustomReward => {
+      Subscription::ModeratorDeletedMessage | Subscription::PermissionManageRewards => {
         event_subscription.condition(condition.user_id(broadcaster_account_id.to_owned()))
       }
       Subscription::ChannelNewSubscription
