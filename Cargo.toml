@@ -3,6 +3,14 @@ name = "twitch_eventsub_structs"
 version = "0.1.2"
 edition = "2021"
 authors = ["Owlkaline"]
+description = "Defined Struct types for of all the twitch eventsub responses easy Serialise/Deserialie"
+repository = "https://github.com/Owlkaline/TwitchEventSubStructs"
+categories = [
+  "api-bindings",
+  "web-programming"
+  "network-programming"
+]
+keywords = ["Twitch", "api", "EventSub", "Structs"]
 resolver = "2"
 license = "MIT"
 
