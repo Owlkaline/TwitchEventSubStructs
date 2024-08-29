@@ -6,9 +6,9 @@ use crate::*;
 pub struct NewAccessTokenResponse {
   pub access_token: String,
   pub expires_in: u32,
-  token_type: String,
+  pub token_type: String,
   pub refresh_token: Option<String>,
-  scope: Option<Vec<String>>,
+  pub scope: Option<Vec<String>>,
 }
 
 #[derive(Serialise, Deserialise, Debug, Clone)]
