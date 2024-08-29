@@ -7,7 +7,7 @@ description = "Defined Struct types for of all the twitch eventsub responses eas
 repository = "https://github.com/Owlkaline/TwitchEventSubStructs"
 categories = [
   "api-bindings",
-  "web-programming"
+  "web-programming",
   "network-programming"
 ]
 keywords = ["Twitch", "api", "EventSub", "Structs"]
