@@ -5,17 +5,17 @@ edition = "2021"
 authors = ["Owlkaline"]
 description = "Defined Struct types for of all the twitch eventsub responses easy Serialise/Deserialie"
 repository = "https://github.com/Owlkaline/TwitchEventSubStructs"
-categories = [
-  "api-bindings",
-  "web-programming",
-  "network-programming"
-]
+categories = ["api-bindings", "web-programming", "network-programming"]
 keywords = ["Twitch", "api", "EventSub", "Structs"]
 resolver = "2"
 license = "MIT"
+
+[features]
+bevy = ["dep:bevy_ecs"]
 
 [dependencies]
 serde_json = "1.0.117"
 serde = "1.0.117"
 serde_derive = "1.0.117"
 serde_with = "3.8.3"
+bevy_ecs = { version = "*", optional = true }

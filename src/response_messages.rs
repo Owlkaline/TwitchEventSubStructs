@@ -2,6 +2,9 @@ use crate::{Deserialise, Serialise};
 
 use crate::*;
 
+#[cfg(feature = "bevy")]
+use bevy_ecs::prelude::Event as BevyEvent;
+
 #[derive(Deserialise)]
 pub struct NewAccessTokenResponse {
   pub access_token: String,
@@ -102,9 +105,9 @@ pub struct GMSubscription {
 #[repr(C)]
 #[derive(Serialise, Deserialise, Debug, Clone)]
 pub struct Mention {
-  user_id: String,
-  user_login: String,
-  user_name: String,
+  pub user_id: String,
+  pub user_login: String,
+  pub user_name: String,
 }
 
 #[repr(C)]
@@ -119,9 +122,9 @@ pub struct Emote {
 #[repr(C)]
 #[derive(Serialise, Deserialise, Debug, Clone)]
 pub struct CheerMote {
-  prefix: String,
-  bits: u32,
-  tier: u32,
+  pub prefix: String,
+  pub bits: u32,
+  pub tier: u32,
 }
 #[derive(Serialise, Deserialise, Clone, Debug, PartialEq)]
 pub enum FragmentType {
@@ -133,6 +136,18 @@ pub enum FragmentType {
   Emote,
   #[serde(rename = "mention")]
   Mention,
+}
+
+impl Into<String> for FragmentType {
+  fn into(self) -> String {
+    match self {
+      FragmentType::Text => "text",
+      FragmentType::CheerMote => "cheermote",
+      FragmentType::Emote => "emote",
+      FragmentType::Mention => "mention",
+    }
+    .to_string()
+  }
 }
 
 #[repr(C)]
@@ -203,7 +218,11 @@ pub struct Cheer {
   pub bits: u32,
 }
 
-#[derive(Serialise, Deserialise, Debug, Clone)]
+#[cfg_attr(
+  feature = "bevy",
+  derive(Serialise, Deserialise, Debug, Clone, BevyEvent)
+)]
+#[cfg_attr(not(feature = "bevy"), derive(Serialise, Deserialise, Debug, Clone))]
 #[serde(untagged)]
 pub enum Event {
   ChatMessage(MessageData),
