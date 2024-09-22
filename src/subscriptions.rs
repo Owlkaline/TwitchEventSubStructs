@@ -64,6 +64,8 @@ pub enum Subscription {
   PermissionReadModerator,
   PermissionManageRewards,
   PermissionSendAnnouncements,
+  PermissionIRCRead,
+  PermissionIRCWrite,
   Custom((String, String, EventSubscription)),
 }
 
@@ -112,6 +114,8 @@ impl Subscription {
     PermissionReadModerator,
     PermissionManageRewards,
     PermissionSendAnnouncements,
+    PermissionIRCRead,
+    PermissionIRCWrite,
     AdBreakBegin
   });
 
@@ -150,6 +154,8 @@ impl Subscription {
     PermissionReadModerator,
     PermissionManageRewards,
     PermissionSendAnnouncements,
+    PermissionIRCRead,
+    PermissionIRCWrite,
     AdBreakBegin
   });
 
@@ -262,6 +268,8 @@ impl Subscription {
       Subscription::PermissionReadModerator => ("", "moderation:read", ""),
       Subscription::PermissionManageRewards => ("", "channel:manage:redemptions", ""),
       Subscription::PermissionSendAnnouncements => ("", "moderator:manage:announcements", ""),
+      Subscription::PermissionIRCRead => ("", "chat:read", ""),
+      Subscription::PermissionIRCWrite => ("", "chat:edit", ""),
       Subscription::Custom((tag, scope, ..)) => (tag.as_str(), scope.as_str(), ""),
     };
 

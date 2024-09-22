@@ -329,6 +329,13 @@ pub struct MessageData {
   pub reply: Option<Reply>,
   pub channel_points_custom_reward_id: Option<String>,
   pub channel_points_animation_id: Option<String>,
+  // Adding afterwards with data from irc
+  #[serde(skip)]
+  pub first_time_chatter: bool,
+  #[serde(skip)]
+  pub returning_chatter: bool,
+  #[serde(skip)]
+  pub moderator: bool,
 }
 
 #[derive(Serialise, Deserialise, Clone, Debug)]
